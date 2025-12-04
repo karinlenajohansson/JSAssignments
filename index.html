@@ -1,152 +1,136 @@
 <!doctype html>
-<html class="no-js" lang="">
-
+<html lang="sv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
+  <title>Väder Dashboard</title>
+  <meta name="description" content="Väderdashboard för svenska städer." />
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-
-
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
-
 <body>
-
-  <!-- Add your site or application content here -->
-
-  <script src="js/app.js"></script>
-
-  <html lang="sv">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Väder Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="current-weather">
-        <div class="temperature-gauge">
-          <div class="gauge-circle">
-            <span id="main-temp">--</span>
-            <span class="celsius">°C</span>
-          </div>
-        </div>
-        <div class="weather-icon" id="weather-icon"></div>
-        <div class="location-time">
-          <p id="current-time">--:--</p>
+<div class="container">
+<aside class="sidebar">
+<div class="current-weather">
+<div class="temperature-gauge">
+        <div class="gauge-circle">
+     <span id="main-temp">--</span>
+          <span class="celsius">°C</span>
         </div>
       </div>
-
-      <div class="temp-range">
-        <div class="temp-box high">
-          <span class="temp-value" id="temp-high">--</span>
-          <span class="temp-label">HIGH</span>
-        </div>
-        <div class="temp-box low">
-          <span class="temp-value" id="temp-low">--</span>
-          <span class="temp-label">LOW</span>
-        </div>
+      <div class="weather-icon" id="weather-icon"></div>
+      <div class="location-time">
+        <p id="current-time">--:--</p>
       </div>
-    </aside>
+    </div>
 
-    <main class="main-content">
-      <header>
-        <h1>Today</h1>
-        <div class="search-container">
-          <input type="text" id="city-input" placeholder="Sök stad...">
-          <button id="search-btn">Sök</button>
-        </div>
-      </header>
-
-      <section class="hourly-forecast" id="hourly-forecast">
-        <div class="forecast-chart"></div>
-      </section>
-
-      <h2>Highlights</h2>
-      <section class="highlights-grid">
-        <div class="highlight-card">
-          <h3>WIND STATUS</h3>
-          <div class="metric-value">
-            <span id="wind-speed">--</span>
-            <span class="unit">m/s</span>
-          </div>
-          <p id="wind-desc">--</p>
-        </div>
-
-        <div class="highlight-card">
-          <h3>FEELS LIKE</h3>
-          <div class="metric-value">
-            <span id="feels-like">--</span>
-            <span class="unit">°C</span>
-          </div>
-          <p id="feels-desc">--</p>
-        </div>
-
-        <div class="highlight-card">
-          <h3>HUMIDITY</h3>
-          <div class="metric-value">
-            <span id="humidity">--</span>
-            <span class="unit">%</span>
-          </div>
-          <div class="status" id="humidity-status">--</div>
-        </div>
-
-        <div class="highlight-card">
-          <h3>VISIBILITY</h3>
-          <div class="metric-value">
-            <span id="visibility">--</span>
-            <span class="unit">km</span>
-          </div>
-          <div class="status" id="visibility-status">--</div>
-        </div>
-
-        <div class="highlight-card">
-          <h3>PRESSURE</h3>
-          <div class="metric-value">
-            <span id="pressure">--</span>
-            <span class="unit">hPa</span>
-          </div>
-          <p id="pressure-desc">--</p>
-        </div>
-
-        <div class="highlight-card">
-          <h3>CLOUDS</h3>
-          <div class="metric-value">
-            <span id="clouds">--</span>
-            <span class="unit">%</span>
-          </div>
-          <div class="status" id="clouds-status">--</div>
-        </div>
-      </section>
-
-      <div id="recent-searches">
-        <h3>Senaste sökningar</h3>
-        <div id="search-list"></div>
+    <div class="temp-range">
+      <div class="temp-box high">
+        <span class="temp-value" id="temp-high">--</span>
+        <span class="temp-label">HIGH</span>
       </div>
-    </main>
-  </div>
+      <div class="temp-box low">
+        <span class="temp-value" id="temp-low">--</span>
+        <span class="temp-label">LOW</span>
+      </div>
+    </div>
+  </aside>
 
-  <script src="script.js"></script>
-  </body>
-  </html>
+  <main class="main-content">
+    <header>
+      <h1>Idag</h1>
+      <div class="search-container">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="Sök stad..."
+          autocomplete="off"
+        />
+        <button id="search-btn">Sök</button>
+      </div>
+    </header>
 
+    <!-- Kommande timmar -->
+    <section class="hourly-forecast" id="hourly-forecast">
+      <h2> Prognos </h2>
+      <div id="hourly-graph" class="hourly-graph"></div>
+    </section>
 
+    <!-- Highlights -->
+    <h2>Väder data</h2>
+    <section class="highlights-grid">
+      <div class="highlight-card">
+        <h3>VIND STATUS</h3>
+        <div class="metric-value">
+          <span id="wind-speed">--</span>
+          <span class="unit">m/s</span>
+        </div>
+        <p id="wind-desc">--</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>KÄNNS SOM </h3>
+        <div class="metric-value">
+          <span id="feels-like">--</span>
+          <span class="unit">°C</span>
+        </div>
+        <p id="feels-desc">--</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>LUFTFUKTIGHET</h3>
+        <div class="metric-value">
+          <span id="humidity">--</span>
+          <span class="unit">%</span>
+        </div>
+        <div class="status" id="humidity-status">--</div>
+      </div>
+
+      <div class="highlight-card">
+        <h3>SIKT</h3>
+        <div class="metric-value">
+          <span id="visibility">--</span>
+          <span class="unit">km</span>
+        </div>
+        <div class="status" id="visibility-status">--</div>
+      </div>
+
+      <div class="highlight-card">
+        <h3>TRYCK</h3>
+        <div class="metric-value">
+          <span id="pressure">--</span>
+          <span class="unit">hPa</span>
+        </div>
+        <p id="pressure-desc">--</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>MOLNIGT</h3>
+        <div class="metric-value">
+          <span id="clouds">--</span>
+          <span class="unit">%</span>
+        </div>
+        <div class="status" id="clouds-status">--</div>
+      </div>
+    </section>
+
+    <!-- 5-dagars -->
+    <section class="daily-forecast" id="daily-forecast">
+      <h2>5-dagar prognos</h2>
+      <div id="daily-list" class="daily-list"></div>
+    </section>
+
+    <!-- Senaste sökningar -->
+    <div id="recent-searches">
+      <h3>Senaste sökningar</h3>
+      <div id="search-list"></div>
+    </div>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
 </body>
-
 </html>

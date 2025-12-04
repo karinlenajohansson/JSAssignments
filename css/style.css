@@ -5,8 +5,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #5FA5A5 0%, #72B8B8 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #c59090 0%, #6a1414 100%);
   min-height: 100vh;
   color: #fff;
 }
@@ -19,7 +19,7 @@ body {
 }
 
 .sidebar {
-  background: rgba(91, 158, 158, 0.6);
+  background: rgb(78, 17, 30);
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,11 @@ body {
   height: 200px;
   margin: 0 auto;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 200, 140, 0.3), rgba(255, 120, 120, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 200, 140, 0.3),
+    rgba(255, 120, 120, 0.3)
+  );
   border: 15px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
@@ -67,6 +71,11 @@ body {
   margin: 20px 0;
 }
 
+.weather-icon img {
+  display: block;
+  margin: 0 auto;
+}
+
 .location-time p {
   font-size: 18px;
   opacity: 0.9;
@@ -86,11 +95,11 @@ body {
 }
 
 .temp-box.high {
-  background: linear-gradient(135deg, #FF8C5A 0%, #FF6B4A 100%);
+  background: linear-gradient(135deg, #c59090 0%, #e8b9b9 100%);
 }
 
 .temp-box.low {
-  background: linear-gradient(135deg, #FFA85A 0%, #FF9A4A 100%);
+  background: linear-gradient(135deg, #b58686 0%, #faacac 100%);
 }
 
 .temp-value {
@@ -101,7 +110,7 @@ body {
 }
 
 .temp-value::after {
-  content: '°C';
+  content: "°C";
   font-size: 20px;
 }
 
@@ -126,6 +135,12 @@ h1 {
   font-size: 42px;
   font-weight: 400;
   margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 25px;
 }
 
 .search-container {
@@ -168,19 +183,58 @@ h1 {
   background: rgba(255, 255, 255, 0.35);
 }
 
+/* Kommande timmar */
+
 .hourly-forecast {
-  background: linear-gradient(135deg, #FFB87A 0%, #FFA562 100%);
+  background: linear-gradient(135deg, #c59090 0%, #faacac 100%);
   padding: 30px;
   border-radius: 20px;
   margin-bottom: 30px;
   min-height: 150px;
 }
 
-h2 {
-  font-size: 32px;
+.hourly-forecast h2 {
+  font-size: 24px;
   font-weight: 400;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
+
+.hourly-graph {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hour-card {
+  flex: 1 1 100px;
+  min-width: 100px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+  text-align: center;
+}
+
+.hour-time {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.hour-icon {
+  margin-bottom: 6px;
+}
+
+.hour-icon img {
+  width: 36px;
+  height: 36px;
+}
+
+.hour-temp {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Highlights */
 
 .highlights-grid {
   display: grid;
@@ -228,6 +282,66 @@ h2 {
   font-weight: 500;
 }
 
+/* 5-dagars */
+
+.daily-forecast {
+  margin-top: 20px;
+}
+
+.daily-forecast h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.daily-list {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.day-card {
+  flex: 1 1 120px;
+  min-width: 120px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+  text-align: center;
+}
+
+.day-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.day-icon {
+  margin-bottom: 8px;
+}
+
+.day-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.day-temps {
+  font-size: 14px;
+}
+
+.day-temps span {
+  display: block;
+}
+
+.day-temp-max {
+  font-weight: 600;
+}
+
+.day-temp-min {
+  opacity: 0.9;
+}
+
+/* Senaste sökningar */
+
 #recent-searches {
   margin-top: 40px;
 }
@@ -251,12 +365,16 @@ h2 {
   cursor: pointer;
   transition: all 0.3s;
   font-size: 15px;
+  border: none;
+  color: #fff;
 }
 
 .search-item:hover {
   background: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
 }
+
+/* Felmeddelande (om du vill använda i UI senare) */
 
 .error {
   color: #fff;
@@ -265,6 +383,8 @@ h2 {
   background: rgba(255, 100, 100, 0.3);
   border-radius: 15px;
 }
+
+/* Responsivitet */
 
 @media (max-width: 1024px) {
   .container {
@@ -297,263 +417,3 @@ h2 {
     font-size: 24px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
-
-/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
-}
-
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
-}
-
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
-}
-
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-  resize: vertical;
-}
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers
- */
-
-.hidden,
-[hidden] {
-  display: none !important;
-}
-
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  /* 1 */
-}
-
-/*
- * Extends the .visually-hidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
-
-.visually-hidden.focusable:active,
-.visually-hidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: inherit;
-  width: auto;
-}
-
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
-.invisible {
-  visibility: hidden;
-}
-
-/*
- * Clearfix: contain floats
- *
- * The use of `table` rather than `block` is only necessary if using
- * `::before` to contain the top-margins of child elements.
- */
-
-.clearfix::before,
-.clearfix::after {
-  content: "";
-  display: table;
-}
-
-.clearfix::after {
-  clear: both;
-}
-
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
-  /* Style adjustments for high resolution devices */
-}
-
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   https://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
-
-@media print {
-  *,
-  *::before,
-  *::after {
-    background: #fff !important;
-    color: #000 !important;
-    /* Black prints faster */
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]::after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]::after {
-    content: " (" attr(title) ")";
-  }
-
-  /*
-   * Don't show links that are fragment identifiers,
-   * or use the `javascript:` pseudo protocol
-   */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
-  }
-
-  pre {
-    white-space: pre-wrap !important;
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-
