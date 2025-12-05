@@ -1,4 +1,4 @@
-const API_KEY = window.WEATHER_API_KEY || ""; // byt ut mot din egen när du testar
+const API_KEY = window.WEATHER_API_KEY || ""; //
 
  // ----- Hämta alla element från DOM ----- //
 
