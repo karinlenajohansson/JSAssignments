@@ -8,7 +8,7 @@
 * Sparar senaste sökningar i localStorage
 *  */
 
-// API_KEY imprteras från confis.js (ligger inte på Github)
+// API_KEY importeras från confis.js (ligger inte på Github)
  // ----- Hämta alla element från DOM ----- //
 
 const API_KEY = window.WEATHER_API_KEY || ""; //
