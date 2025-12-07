@@ -204,7 +204,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      `;
    }
 
-   // Visa aktuell tid
+   // Visar aktuell tid
    if (currentTimeEl) {
      const now = new Date();
      currentTimeEl.textContent = now.toLocaleTimeString("sv-SE", {
