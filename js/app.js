@@ -1,35 +1,54 @@
-const API_KEY = window.WEATHER_API_KEY || ""; //
+/*
+* Väder dashboard
+* Hämtar och visar väderdata från OpenWeatherMap API
+* Funktioner för svenska städer
+* Visar nuvarande temperatur och detaljer
+* Timprognos (24 timmar)
+* 5-dagarsprognos
+* Sparar senaste sökningar i localStorage
+*  */
 
+// API_KEY imprteras från confis.js (ligger inte på Github)
  // ----- Hämta alla element från DOM ----- //
 
+const API_KEY = window.WEATHER_API_KEY || ""; //
+
+// Sökning
  const cityInput = document.getElementById("city-input");
  const searchBtn = document.getElementById("search-btn");
 
+ // Sidofält: Huvudtemperatur
  const mainTempEl = document.getElementById("main-temp");
  const tempHighEl = document.getElementById("temp-high");
  const tempLowEl = document.getElementById("temp-low");
  const weatherIconEl = document.getElementById("weather-icon");
  const currentTimeEl = document.getElementById("current-time");
 
+ // Väderdata: Vind
  const windSpeedEl = document.getElementById("wind-speed");
  const windDescEl = document.getElementById("wind-desc");
 
+ // Väderdata: Känns som
  const feelsLikeEl = document.getElementById("feels-like");
  const feelsDescEl = document.getElementById("feels-desc");
 
+ // Väderdata: Luftfuktighet
  const humidityEl = document.getElementById("humidity");
  const humidityStatusEl = document.getElementById("humidity-status");
 
+ // Väderdata: Sikt
  const visibilityEl = document.getElementById("visibility");
  const visibilityStatusEl = document.getElementById("visibility-status");
 
+ // Väderdata: Lufttryck
  const pressureEl = document.getElementById("pressure");
  const pressureDescEl = document.getElementById("pressure-desc");
 
+ // Molnighet
  const cloudsEl = document.getElementById("clouds");
  const cloudsStatusEl = document.getElementById("clouds-status");
 
- // Kommande timmar
+ // Prognoser
  const hourlyGraphEl = document.getElementById("hourly-graph");
  // 5-dagars
  const dailyListEl = document.getElementById("daily-list");
@@ -38,7 +57,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
 
  // Senaste sökta städer
  let recentCities = [];
- const MAX_RECENT = 5;
+ const MAX_RECENT = 5;  // Max antal sparade städer
 
  console.log("Väderdashboard-script laddat");
 
@@ -49,6 +68,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
 
    const key = raw.toLowerCase();
 
+ // Översättning från engelska till svenska
    const map = {
      "overcast clouds": "Mulet",
      "broken clouds": "Molnigt",
@@ -81,7 +101,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    });
  }
 
- // Enter i inputen
+ // Enter i inputfältet
  if (cityInput) {
    cityInput.addEventListener("keydown", (event) => {
      if (event.key === "Enter") {
@@ -117,7 +137,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      API_KEY;
 
    try {
-     // enkel loading-state
+     // Visa laddningsstatus
      if (currentTimeEl) currentTimeEl.textContent = "Hämtar väder...";
      if (mainTempEl) mainTempEl.textContent = "--";
      if (tempHighEl) tempHighEl.textContent = "--";
@@ -128,16 +148,22 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
 
      const response = await fetch(url);
 
+     // Felhantering Staden finns inte
      if (!response.ok) {
        showError("Staden hittades inte, testa en annan stad i Sverige.");
        return;
      }
 
      const data = await response.json();
+
+     // Visa nuvarande väder
      renderCurrentWeather(data);
 
+     // Hämta prognos
      const cityName = data.name || city;
      fetchForecast(cityName);
+
+     // Spara sökningen
      addRecentSearch(cityName);
    } catch (error) {
      console.error(error);
@@ -148,6 +174,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
  // ----- Render: nuvarande väder ----- //
 
  function renderCurrentWeather(data) {
+   // Extrahera data från API-svar
    const temp = Math.round(data.main.temp);
    const feelsLike = Math.round(data.main.feels_like);
    const tempMax = Math.round(data.main.temp_max);
@@ -162,10 +189,12 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    const visibilityKm = (visibilityMeters / 1000).toFixed(1);
    const clouds = data.clouds?.all ?? 0;
 
+   // Uppdatera huvudtemperatur i sidofältet
    if (mainTempEl) mainTempEl.textContent = temp;
    if (tempHighEl) tempHighEl.textContent = tempMax;
    if (tempLowEl) tempLowEl.textContent = tempMin;
 
+   // Visa väderikon
    if (weatherIconEl) {
      weatherIconEl.innerHTML = `
        <img
@@ -175,6 +204,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      `;
    }
 
+   // Visa aktuell tid
    if (currentTimeEl) {
      const now = new Date();
      currentTimeEl.textContent = now.toLocaleTimeString("sv-SE", {
@@ -183,12 +213,15 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      });
    }
 
+   // Uppdatera vind
    if (windSpeedEl) windSpeedEl.textContent = wind.toFixed(1);
    if (windDescEl) windDescEl.textContent = description;
 
+   // Uppdatera känns som
    if (feelsLikeEl) feelsLikeEl.textContent = feelsLike;
    if (feelsDescEl) feelsDescEl.textContent = `Känns som ${feelsLike}°C`;
 
+   // Uppdatera luftfuktighet med status
    if (humidityEl) humidityEl.textContent = humidity;
    if (humidityStatusEl) {
      if (humidity < 40) {
@@ -200,6 +233,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      }
    }
 
+   // Uppdatera sikt med satus
    if (visibilityEl) visibilityEl.textContent = visibilityKm;
    if (visibilityStatusEl) {
      if (visibilityKm >= 10) {
@@ -211,6 +245,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      }
    }
 
+   // Uppdatea lufttryck med beskrivning
    if (pressureEl) pressureEl.textContent = pressure;
    if (pressureDescEl) {
      if (pressure < 1000) {
@@ -222,6 +257,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      }
    }
 
+   // Uppdatera med molninghet med status
    if (cloudsEl) cloudsEl.textContent = clouds;
    if (cloudsStatusEl) {
      if (clouds < 20) {
@@ -254,6 +290,8 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      }
 
      const data = await response.json();
+
+     // Rendera båda prognoserna
      renderHourlyForecast(data);
      renderDailyForecast(data);
    } catch (error) {
@@ -267,7 +305,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    }
  }
 
- // Kommande timmar - kort med "NU" på första
+ // Prognos (kommande timmar) - kort med "NU" på första
 
  function renderHourlyForecast(data) {
    if (!hourlyGraphEl) return;
@@ -280,9 +318,12 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      return;
    }
 
+   // Skapa HTML för vajre timkort
    const html = nextItems
      .map((item, index) => {
        const dt = new Date(item.dt * 1000);
+
+       // Första kortet visar "NU" istället för tid
        const timeLabel =
          index === 0
            ? "NU"
@@ -322,6 +363,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    const list = data.list || [];
    const daysMap = {};
 
+   // Grupperar prognoser per dag
    list.forEach((item) => {
      const d = new Date(item.dt * 1000);
      const dateKey = d.toISOString().slice(0, 10); // YYYY-MM-DD
@@ -332,22 +374,27 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      daysMap[dateKey].push(item);
    });
 
+   // Ta första 5 dagarna
    const allDates = Object.keys(daysMap).sort();
    const nextFive = allDates.slice(0, 5);
 
+   // Skapa HTML för varje dag
    const html = nextFive
      .map((dateKey) => {
        const items = daysMap[dateKey];
 
+       // Hitta min och max temperatur för dagen
        const temps = items.map((it) => it.main.temp);
        const min = Math.round(Math.min(...temps));
        const max = Math.round(Math.max(...temps));
 
+       // Välj ikon från mitten av dagen för representativ bild
        const middleItem = items[Math.floor(items.length / 2)];
        const icon = middleItem.weather[0].icon;
        const rawDesc = middleItem.weather[0].description;
        const description = formatDescription(rawDesc);
 
+       // Formatera datumlaber (t.ex. "mån 9 dec"
        const d = new Date(items[0].dt * 1000);
        const dayLabel = d.toLocaleDateString("sv-SE", {
          weekday: "short",
@@ -376,7 +423,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    dailyListEl.innerHTML = html;
  }
 
- // ----- Senaste sökningar ----- //
+ // ----- LOCALSTORAGE: Senaste sökningar ----- //
 
  function loadRecentSearches() {
    try {
@@ -389,6 +436,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    }
  }
 
+ // Sparar senaste sökningar till localStorage
  function saveRecentSearches() {
    try {
      localStorage.setItem("recentCities", JSON.stringify(recentCities));
@@ -397,18 +445,20 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    }
  }
 
+ // Lägger till en stad i senaste sökningar
  function addRecentSearch(city) {
    const cityName = (city || "").trim();
    if (!cityName) return;
 
-   // ta bort om den redan finns
+   // Ta bort duplicat om den redan finns
    recentCities = recentCities.filter(
      (c) => c.toLowerCase() !== cityName.toLowerCase()
    );
 
-   // lägg först
+   // Lägg till först i listan
    recentCities.unshift(cityName);
 
+   // Begräna till MAX_RECENT städer
    if (recentCities.length > MAX_RECENT) {
      recentCities = recentCities.slice(0, MAX_RECENT);
    }
@@ -417,6 +467,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
    renderRecentSearches();
  }
 
+ // Renderar listan med senaste sökningar
  function renderRecentSearches() {
    if (!searchListEl) return;
 
@@ -425,6 +476,7 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
      return;
    }
 
+   // Skapa knappar för varje sparad stad
    searchListEl.innerHTML = recentCities
      .map(
        (city) => `
@@ -438,9 +490,11 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
 
  // ----- Felhantering ----- //
 
+// Visar felmeddelande och återsäller UI
  function showError(message) {
    alert(message);
 
+   // Återställ alla värden till "--"
    if (mainTempEl) mainTempEl.textContent = "--";
    if (tempHighEl) tempHighEl.textContent = "--";
    if (tempLowEl) tempLowEl.textContent = "--";
@@ -466,5 +520,6 @@ const API_KEY = window.WEATHER_API_KEY || ""; //
 
  // ----- Init ----- //
 
+// Ladda senaste sökningar när sidan laddas
  loadRecentSearches();
 
