@@ -6,7 +6,7 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #89a2c1 0%, #89a2c1 100%);
+  background: linear-gradient(135deg, #75b196 0%, #72b8b8 100%);
   min-height: 100vh;
   color: #fff;
 }
@@ -19,7 +19,7 @@ body {
 }
     /* Sidofältets utseende */
 .sidebar {
-  background: rgb(152, 152, 159);
+  background: rgb(98, 168, 168);
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
@@ -43,8 +43,8 @@ body {
   border-radius: 50%;
   background: linear-gradient(
     135deg,
-    rgba(255, 200, 156, 0.67),
-    rgba(253, 183, 136, 0.67)
+    rgb(255, 178, 122),
+    rgb(250, 164, 126)
   );
   border: 15px solid rgba(255, 255, 255, 0.2);
   display: flex;
@@ -97,11 +97,11 @@ body {
 }
 
 .temp-box.high {
-  background: linear-gradient(135deg, #cce5ff 0%, #afd6fd 100%);
+  background: linear-gradient(135deg, #ff8c5a 0%, #ff6b4a 100%);
 }
 
 .temp-box.low {
-  background: linear-gradient(135deg, #b1acf4 0%, #8288f4 100%);
+  background: linear-gradient(135deg, #ffa85a 0%, #ff9a4a 100%);
 }
 
 .temp-value {
@@ -188,7 +188,7 @@ h2 {
 /* Kommande timmar */
 
 .hourly-forecast {
-  background: linear-gradient(135deg, #acbda4 0%, #627760 100%);
+  background: linear-gradient(135deg, #ffa562 0%, #faa47e 100%);
   padding: 30px;
   border-radius: 20px;
   margin-bottom: 30px;
