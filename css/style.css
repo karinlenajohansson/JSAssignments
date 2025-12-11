@@ -10,14 +10,14 @@ body {
   min-height: 100vh;
   color: #fff;
 }
-
+    /* Layout: två kolumner (sidebar + main content) */
 .container {
   display: grid;
   grid-template-columns: 350px 1fr;
   min-height: 100vh;
   gap: 0;
 }
-
+    /* Sidofältets utseende */
 .sidebar {
   background: rgb(152, 152, 159);
   padding: 40px 30px;
@@ -33,11 +33,13 @@ body {
 .temperature-gauge {
   margin-bottom: 20px;
 }
-
+     /* Temperatur-cirkel */
 .gauge-circle {
   width: 200px;
   height: 200px;
   margin: 0 auto;
+
+  /* Rund cirkel med gradient */
   border-radius: 50%;
   background: linear-gradient(
     135deg,
@@ -205,6 +207,7 @@ h2 {
   flex-wrap: wrap;
 }
 
+ /* Prognos-kort för kommande timmar */
 .hour-card {
   flex: 1 1 100px;
   min-width: 100px;
@@ -234,7 +237,7 @@ h2 {
   font-weight: 600;
 }
 
-/* Highlights */
+/* Väderdata */
 
 .highlights-grid {
   display: grid;
@@ -300,6 +303,7 @@ h2 {
   flex-wrap: wrap;
 }
 
+ /* 5-dagars prognos */
 .day-card {
   flex: 1 1 120px;
   min-width: 120px;
@@ -374,7 +378,7 @@ h2 {
   transform: translateY(-2px);
 }
 
-/* Felmeddelande (om du vill använda i UI senare) */
+/* Felmeddelande */
 
 .error {
   color: #fff;

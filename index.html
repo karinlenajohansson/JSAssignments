@@ -10,28 +10,28 @@
 
 <body>
 <div class="container">
-   <!-- Sidofält, visar temperatur och hög och lågtryck -->
-<aside class="sidebar">
-<div class="current-weather">
+  <!-- Sidofält, visar temperatur och hög och lågtryck -->
+  <aside class="sidebar">
+    <div class="current-weather">
 
-  <!-- Temperaturgauge med cirkulär design -->
-<div class="temperature-gauge">
+      <!-- Temperaturgauge med cirkulär design -->
+      <div class="temperature-gauge">
         <div class="gauge-circle">
-     <span id="main-temp">--</span>
+          <span id="main-temp">--</span>
           <span class="celsius">°C</span>
         </div>
       </div>
 
-  <!-- Väderikon från API -->
+      <!-- Väderikon från API -->
       <div class="weather-icon" id="weather-icon"></div>
 
-  <!-- Aktuell tid och plats -->
+      <!-- Aktuell tid och plats -->
       <div class="location-time">
         <p id="current-time">--:--</p>
       </div>
     </div>
 
-  <!-- Högsta och lägsta temperaturen -->
+    <!-- Högsta och lägsta temperaturen -->
     <div class="temp-range">
       <div class="temp-box high">
         <span class="temp-value" id="temp-high">--</span>
@@ -46,7 +46,7 @@
 
   <!-- Huvudinnehåll: Sökning, prognoser och detaljer -->
   <main class="main-content">
-   <!-- Header med sökning -->
+    <!-- Header med sökning -->
     <header>
       <h1>Idag</h1>
       <div class="search-container">
@@ -62,14 +62,14 @@
 
     <!-- Timprognos, visar kommande 24 timmar -->
     <section class="hourly-forecast" id="hourly-forecast">
-      <h2> Prognos </h2>
+      <h2>Prognos</h2>
       <div id="hourly-graph" class="hourly-graph"></div>
     </section>
 
     <!-- Väderdata, detaljerad väderinformation -->
-    <h2>Väder data</h2>
+    <h2>Väderdata</h2>
     <section class="highlights-grid">
-    <!-- Vind -->
+      <!-- Vind -->
       <div class="highlight-card">
         <h3>VIND STATUS</h3>
         <div class="metric-value">
