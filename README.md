@@ -1,18 +1,18 @@
 # JSAssignments
 
-En enkel väderapp där man kan söka efter städer i Sverige och se:
+En enkel väderapplikation där man kan söka efter städer i Sverige och få:
 
 Nuvarande väder (temperatur, känns som, vind, luftfuktighet, sikt, molnighet, lufttryck)
 Timprognos för kommande timmar
 5-dagars prognos
-Felmeddelande om man skriver stavar fel på stad
-Senaste sökningar (sparas i webbläsarens 'localStorage')
+Felmeddelande om en ogiltig stad anges
+Senaste sökningar (sparas i webbläsarens localStorage)
 
 Appen använder **OpenWeatherMap API** och är byggd med HTML, CSS och JavaScript
 
 ## API-nyckel (måste läggas in lokalt)
-Appen använder Open Weather Map API, vilket kräver en egen API-nyckel. 
-Av säkerhetsskäl finns ingen nyckel i detta repo.
+Applikationen krävern en API-nyckel från OpenWeatherMap.
+Av säkerhetsskäl finns ingen nyckel inkluderat i repot.
 
 ### Skapa skaffar du en API-nyckel
 1. Gå till: https://home.openweathermap.org/api_keys
